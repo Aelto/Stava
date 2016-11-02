@@ -1,1 +1,36 @@
 
+:root {
+    --main-bg-color: rgba(20, 20, 25, 0.9);
+    --white-light-color: rgba(255, 255, 255, 0.8);
+    --grey-light-color: rgba(255, 255, 255, 0.2);
+    --blue-light-color: rgba(120, 155, 205, 1);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+
+    -webkit-app-region: drag;
+    color: var(--white-light-color);
+
+}
+
+a, input, .no-drag {
+    -webkit-app-region: no-drag;
+}
+
+input {
+    border: none;
+    outline: none;
+
+    background: var(--grey-light-color);
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+
+    color: var(--blue-light-color);
+}
+
+a {
+    color: var(--blue-light-color)
+}

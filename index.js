@@ -28,6 +28,8 @@ app.on('ready', () => {
         home.loadURL(`file://${__dirname}/app/home/index.html`)
         home.webContents.openDevTools()
 
+        updater.close()
+
         home.on('closed', () => {
             home = null
         })
