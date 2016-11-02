@@ -1,4 +1,4 @@
-# Stave
+# Stava
 League of Legends Game analyst.
 
 # Use it
