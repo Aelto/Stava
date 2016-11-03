@@ -3,14 +3,14 @@ import {ipcRenderer} from 'electron'
 import * as userData from '../common/userdata.js'
 import * as api from '../common/api.js'
 import * as cacheManager from '../common/cachemanager.js'
-import {setLocalVersion} from '../common/config.js'
+import {setLocalVersion, getConfig} from '../common/config.js'
 
 import app from './views/app.vue'
 
 
 const data = {
     message: 'looking for updates',
-    askApiKey: false // when sets to true, a modal appears and ask for an riot games api key
+    askApiKey: false // when sets to true, a modal appears and ask for a riot games api key
 }
 
 const appVue = new Vue({
@@ -36,33 +36,18 @@ userData.checkFiles({
     'cache_champions.json': ''
 })
 
-// we now get the config file's content
-const config = JSON.parse( userData.getContent('config.json') )
-if ( config.apiKey === '' )
+// we get the config file's content as an Object
+const _config = getConfig()
+if ( _config.apiKey === '' )
     data.askApiKey = true // setting this to 'true' will toggle a modal with vuejs (see app.vue)
-else {
-    // the app needs a riot games api key to continue
-    // hence the 'if else'
-
-    checkAndUpdate( config.apiKey, config.gameServer, config.localVersion )
-}
+else
+    checkAndUpdate( _config.apiKey, _config.gameServer, _config.localVersion )
 
 async function checkAndUpdate(apiKey, gameServer, localVersion) {
-    /*const liveVersion =  JSON.parse(await api.getGameLiveVersion( apiKey, gameServer ))
-    const isAppUpToDate = typeof localVersion === "string" && localVersion === liveVersion.v
-
-    if ( isAppUpToDate ) {
-        // do something TODO now that the app is up to date
-        return console.log( 'the app is up to date' )
-    }
-    console.log( 'the app is not up to date' )*/
-
     const liveVersion = await JSON.parse(await api.getGameLiveVersion( apiKey, gameServer ))
 
-    if ( cacheManager.isAppCacheUpdated(apiKey, liveVersion.v) ) {
-        // do something TODO now that the app is up to date
+    if ( cacheManager.isAppCacheUpdated(apiKey, liveVersion.v) )
         return  updatesDone( liveVersion.v )
-    }
 
     const asyncUpdateFunctions = [
         cacheManager.updateJsonSpellId,
@@ -74,8 +59,10 @@ async function checkAndUpdate(apiKey, gameServer, localVersion) {
     data.message = `downloading updates ${progress / asyncUpdateFunctions.length}%`
 
     asyncUpdateFunctions.forEach( async fn => {
+        // send an async call to get the JSON we want
         await fn( apiKey, gameServer )
 
+        // one more file has been downloaded
         progress += 1
 
         const currentState = Math.round( (progress / asyncUpdateFunctions.length) * 100 )
@@ -87,11 +74,8 @@ async function checkAndUpdate(apiKey, gameServer, localVersion) {
 }
 
 function updatesDone ( newVersion ) {
-
-    data.message = 'done!'
-
     setLocalVersion( newVersion )
-
     setTimeout( ipcRenderer.send('update-done'), 25 )
 
+    data.message = 'done!'
 }

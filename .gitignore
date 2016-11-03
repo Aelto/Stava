@@ -1,2 +1,4 @@
 node_modules
 yarn.lock
+app/home/bundle.home.js
+app/updater/bundle.updater.js
