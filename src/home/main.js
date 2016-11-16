@@ -84,16 +84,15 @@ async function startInterval ({gameServer, summonerName, apiKey, pathToLeagueFol
 
                 data.global.showLoading = false
 
-                data.isSpectating = false
-
                 return
-            } else if ( data.isSpectating )
-                return
-
-
+            }
         }
 
-        data.isSpectating = true
+        let gameData = JSON.parse( await api.getGameDataFromSummonerId(apiKey, gameServer, summonerId) )
+
+        // we don't send a notification if the user was already notified for this game
+        if ( gameData.gameId === config.getLastGameId() )
+            return
 
         const option = {
           title: `${summonerName} just started a game.`,
@@ -102,14 +101,20 @@ async function startInterval ({gameServer, summonerName, apiKey, pathToLeagueFol
         }
         const notif = new Notification(option.title, option)
         notif.onclick = async () => {
-            const gameData = await spectate(apiKey, summonerName, summonerId, gameServer)
+            gameData = await spectate(apiKey, summonerName, summonerId, gameServer, gameData)
 
             data.global.showLoading = true
             data.global.gameData = gameData
 
+            config.setLastGameId( gameData.gameId )
+
             console.log(gameData)
 
             ipcRenderer.send('home-set-loading')
+        }
+
+        notif.onclose = () => {
+            config.setLastGameId( gameData.gameId )
         }
 
     }

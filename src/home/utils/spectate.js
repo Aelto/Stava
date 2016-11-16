@@ -5,23 +5,23 @@ import getReleasesFolderName from './getLatestLolReleaseFolder.js'
 import path from 'path'
 import fs from 'fs'
 
-export default async function (apiKey, summonerName, summonerId, gameServer) {
+export default async function (apiKey, summonerName, summonerId, gameServer, data) {
     CacheManager.loadCacheJson()
 
-    data = JSON.parse( await api.getGameDataFromSummonerId(apiKey, gameServer, summonerId) )
     data = await getGameRankedStats(apiKey, gameServer, formateGameData( data ))
 
     return data
 }
 
-// inside the league of legends folders there are a list of all centered splash arts
-// to get to these images we have to find the latest release folder
-// They're named like "0.0.1.229" / "0.0.1.265" etc...
-// releasesFolderName will be equal to the latest release folder based on their version
-const releasesFolderName = getReleasesFolderName()
-const pathToLeagueFolder = config.getPathToLeagueFolder()
-
 function formateGameData( data ) {
+    // inside the league of legends folders there are a list of all centered splash arts
+    // to get to these images we have to find the latest release folder
+    // They're named like "0.0.1.229" / "0.0.1.265" etc...
+    // releasesFolderName will be equal to the latest release folder based on their version
+    const releasesFolderName = getReleasesFolderName()
+    const pathToLeagueFolder = config.getPathToLeagueFolder()
+
+
     data.gameMap = data.mapId === 11
         ? `summoner's rift`
         : `not summoner's rift`
