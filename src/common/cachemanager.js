@@ -1,9 +1,8 @@
-const fs = require('fs')
+import fs from 'fs'
 
 import {getLocalVersion} from './config.js'
-import * as api from './api.js'
 import {setContent, getContent} from './userdata.js'
-// import {setGameVersion} from './config.js'
+import * as api from './api.js'
 
 const cacheFiles = {}
 
@@ -33,7 +32,7 @@ export const isAppCacheUpdated = (apiKey, liveVersion) => {
 export const loadCacheJson = () => {
 
     ;[cacheSummonersFile, cacheRunesFile, cacheSpellsFile, cacheChampionsFile]
-    .forEach(fileName => cacheFiles[file.replace('.json', '')] = JSON.parse( getContent(fileName) ))
+    .forEach(fileName => cacheFiles[fileName.replace('.json', '')] = JSON.parse( getContent(fileName) ))
 
 }
 
@@ -43,9 +42,11 @@ export const loadCacheJson = () => {
  * or even getting a rune informations from its ID
  */
 
+export const formateSummonerName = name => name.toLowerCase().split(' ').join('')
+
 // Setters
 export const addSummonerInCache = (name, data) => {
-    name = name.toLowerCase().split(' ').join('')
+    name = formateSummonerName( name )
 
     const content = JSON.parse( getContent(cacheSummonersFile) )
     content.summoners[name] = data
@@ -59,18 +60,20 @@ export const getCachedSummoners = () => JSON.parse(getContent(cacheSummonersFile
 
 export const getCachedSummonersList = () => Object.keys(getCachedSummoners())
 
-export const isSummonerInCache = (name) => getCachedSummonersList().filter(n => name.toLowerCase() === n).length > 0
+export const getCachedSummoner = (name) => getCachedSummonersList[ formateSummonerName(name) ]
 
-export const getSpellInfoFromId = (id) => cacheFiles.spells_cache.data[id]
+export const isSummonerInCache = (name) => getCachedSummonersList().filter(n => name.formateSummonerName === n).length > 0
 
-export const getRunesInfoFromId = (id) => cacheFiles.runes_cache.data[id]
+export const getSpellInfoFromId = (id) => cacheFiles.cache_spells.data[id]
+
+export const getRunesInfoFromId = (id) => cacheFiles.cache_runes.data[id]
 
 export const getChampionInfoFromName = (name) => {
     return cacheFiles.champions_cache.data[ Object.keys(cacheFiles.champions_cache.data)
         .filter(key => cacheFiles.champions_cache.data[key].name.includes(name))[0] ]
 }
 
-export const getChampionInfoFromId = (id) => cacheFiles.champions_cache.data[ id ]
+export const getChampionInfoFromId = (id) => cacheFiles.cache_champions.data[ id ]
 
 /** ------------------------------------------------------------------
  * everything below this comment will control the app's cache updates
@@ -100,24 +103,4 @@ export const updateJsonChampionId = async (apiKey, gameServer) => {
     console.log('updating: Champion cache')
     const newJsonChampionId = JSON.parse( await api._fetch(url) )
     setContent( cacheChampionsFile, JSON.stringify(newJsonChampionId, null, '\t') )
-}
-
-export const updateAllJsonFile = (apiKey) => {
-    console.log('updating cache')
-    return Promise.all([
-        updateJsonSpellId(apiKey),
-        updateJsonRuneId(apiKey),
-        updateJsonChampionId(apiKey)
-    ]).then( () => {
-
-        return api.getGameLiveVersion(apiKey)
-        .then(JSON.parse)
-        .then(data => {
-
-            setGameVersion( data.v )
-
-            return data.v
-        })
-
-    })
 }

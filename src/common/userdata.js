@@ -1,6 +1,7 @@
 const app = require('electron').remote.app
 import path from 'path'
 import fs from 'fs'
+import {exec} from 'child_process'
 
 const subFolder = 'data'
 
@@ -26,3 +27,5 @@ export const checkFiles = filesObject => {
 export const getContent = filePath => fs.readFileSync( path.join(getPath(), filePath), 'utf8' )
 
 export const setContent = (filePath, content) => fs.writeFileSync( path.join(getPath(), filePath), content, 'utf8' )
+
+export const openExplorer = filePath => exec('start "" "' + getPath() + '"')

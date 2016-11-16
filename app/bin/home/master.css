@@ -1,0 +1,54 @@
+@font-face {
+	font-family: 'Roboto';
+	src: url('../common/font/Roboto-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'OpenSansLight';
+	src: url('../common/font/OpenSans-Light.ttf');
+}
+
+:root {
+    --main-menu-z: 2;
+	--main-content-z: 1;
+	--main-loading-z: 3;
+	--main-handlebar-z: 4;
+
+	--loading-champion-selected-z: 1;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+
+    background-color: white;
+	font-family: 'OpenSansLight'
+}
+
+.global {
+	display: flex;
+	flex-direction: row-reverse;
+	width: 100vw;
+	height: 100vh;
+}
+
+
+
+
+.background {
+	background-image: url('imgs/backgrounds/background_1.jpg');
+	background-position: center;
+}
+
+.bg-landing {
+	background-image: url('imgs/bg-landing.jpg');
+}
+
+.login-menu {
+	background-image: url('imgs/backgrounds/background_4.jpg');
+	background-position: 92% 54%;
+}
+
+.settings .frame {
+	background-image: url('./imgs/backgrounds/background_4.jpg')
+}

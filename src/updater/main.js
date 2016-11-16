@@ -26,7 +26,8 @@ userData.checkFiles({
         localVersion: '0.0.0',
         apiKey: '',
         summonerName: 'no name',
-        gameServer: 'euw'
+        gameServer: 'euw',
+        pathToLeagueFolder: 'null'
     }, null, '\t'),
     'cache_summoners.json': JSON.stringify({
         summoners: {}

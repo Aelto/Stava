@@ -2,7 +2,7 @@ module.exports = {
     entry: ['babel-polyfill', './src/home/main.js'],
     target: 'electron',
     output: {
-        path: `./app/home`,
+        path: `./app/bin/home`,
         filename: `bundle.home.js`
     },
 

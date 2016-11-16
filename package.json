@@ -4,12 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "electron .",
+    "start": "electron ./app",
     "build": "webpack --config webpack.updater.config.js && webpack --config webpack.home.config.js",
     "build-home": "webpack --config webpack.home.config.js",
     "watch-home": "webpack --config webpack.home.config.js --progress --colors --watch",
     "build-updater": "webpack --config webpack.updater.config.js",
-    "watch-updater": "webpack --config webpack.updater.config.js --progress --colors --watch"
+    "watch-updater": "webpack --config webpack.updater.config.js --progress --colors --watch",
+    "pack": "asar pack app electron/resources/app.asar",
+    "packager": "electron-packager app Stava --platform=win32 --arch=x64 --icon=\"app/stava_icon.ico\""
   },
   "dependencies": {
     "babel-core": "^6.18.0",
@@ -19,6 +21,7 @@
     "babel-preset-es2017": "^6.16.0",
     "css-loader": "^0.25.0",
     "electron": "^1.4.4",
+    "electron-packager": "^8.2.0",
     "file-loader": "^0.9.0",
     "vue-loader": "^9.7.0",
     "webpack": "^1.13.3"

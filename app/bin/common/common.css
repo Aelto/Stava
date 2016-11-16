@@ -1,0 +1,89 @@
+@font-face {
+	font-family: 'Merriweather';
+	src: url('../common/font/Merriweather/Merriweather-Regular.ttf');
+}
+@font-face {
+	font-family: 'Montserrat';
+	src: url('../common/font/Montserrat/Montserrat-Regular.ttf');
+}
+@font-face {
+	font-family: 'Oxygen';
+	src: url('../common/font/Oxygen/Oxygen-Regular.ttf');
+}
+@font-face {
+	font-family: 'Dosis';
+	src: url('../common/font/Dosis/Dosis-Regular.ttf');
+}
+@font-face {
+	font-family: 'Bitter';
+	src: url('../common/font/Bitter/Bitter-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'Oswald';
+	src: url('../common/font/font.woff2') format('woff2');
+}
+
+
+:root {
+    --main-bg-color: rgba(20, 20, 25, 0.9);
+    --main-bg-rgb: 20, 20, 25;
+    --main-bg-lighter-color: rgba(20, 20, 25, 0.6);
+    --white-light-color: rgba(255, 255, 255, 0.8);
+    --grey-light-color: rgba(255, 255, 255, 0.2);
+    --grey-very-light-color: rgba(255, 255, 255, 0.05);
+    --blue-light-color: rgba(120, 155, 205, 1);
+    --blue-red-color: rgba(199, 58, 49, 1);
+    --soft-white-color: rgba(245, 245, 245, 1);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+
+    /*-webkit-app-region: drag;*/
+    color: var(--white-light-color);
+
+}
+
+a, input, .no-drag {
+    -webkit-app-region: no-drag;
+}
+
+.drag-area {
+	-webkit-app-region: drag;
+}
+
+input {
+    border: none;
+    outline: none;
+
+    background: var(--grey-light-color);
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+
+    color: var(--blue-light-color);
+}
+
+input[type=checkbox] {
+    position: relative;
+    -webkit-appearance:button;
+    padding: 8px!important;
+}
+
+input[type=checkbox]:checked:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+
+    background: rgb(45, 43, 38);
+}
+
+a {
+    color: var(--blue-light-color)
+}

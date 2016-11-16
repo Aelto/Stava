@@ -8,6 +8,7 @@ export const getApiKey = () => getConfig().apiKey || ''
 export const getLocalVersion = () => getConfig().localVersion || ''
 export const getLastGameId = () => getConfig().lastGameId || -1
 export const getGameServer = () => getConfig().gameServer || ''
+export const getPathToLeagueFolder = () => getConfig().pathToLeagueFolder || ''
 
 // SET
 export const setConfig = newConfig => userData.setContent('config.json', JSON.stringify(newConfig, null, '\t'))
@@ -22,4 +23,5 @@ export const setSummonerName = (newSummonerName) => _setConfigKey( 'summonerName
 export const setApiKey = (newApiKey) => _setConfigKey( 'apiKey', newApiKey )
 export const setLocalVersion = (newLocalVersion) => _setConfigKey( 'localVersion', newLocalVersion )
 export const setLastGameId = (newLastGameId) => _setConfigKey( 'lastGameId', newLastGameId )
-export const setGameServer = (newGameServer) => _setGameServer( 'gameServer', newGameServer )
+export const setGameServer = (newGameServer) => _setConfigKey( 'gameServer', newGameServer )
+export const setPathToLeagueFolder = (newPathToLeagueFolder) => _setConfigKey( 'pathToLeagueFolder', newPathToLeagueFolder )
