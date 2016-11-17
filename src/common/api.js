@@ -36,7 +36,7 @@ export const getGameDataFromSummonerId = (apiKey, gameServer, id) => {
 }
 
 export const getRankedStatsFromSummonersIds = (apiKey, gameServer, ids) => {
-    const url = `https://${gameServer}.api.pvp.net/api/lol/${gameServer}/v2.5/league/by-summoner/${ids.join(', ')}/entry?api_key=${apiKey}`
+    const url = `https://${gameServer}.api.pvp.net/api/lol/${gameServer}/v2.5/league/by-summoner/${ids.join(',')}/entry?api_key=${apiKey}`
 
     return _fetch(url)
 }

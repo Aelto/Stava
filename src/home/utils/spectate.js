@@ -87,7 +87,6 @@ function formateGameData( data ) {
         return ban
     })
 
-    console.log(data)
     return data
 }
 
