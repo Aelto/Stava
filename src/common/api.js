@@ -18,9 +18,12 @@ export const _fetch = (url) => {
 }
 
 export const getGameLiveVersion = (apiKey, server) => {
-    const url = `https://global.api.pvp.net/api/lol/static-data/${server}/v1.2/realm?api_key=${apiKey}`
+    // const url = `https://global.api.pvp.net/api/lol/static-data/${server}/v1.2/realm?api_key=${apiKey}`
+		const url = `https://global.api.pvp.net/api/lol/static-data/${server}/v1.2/versions?api_key=${apiKey}`
 
     return _fetch( url )
+		.then(response => JSON.parse(response))
+		.then(versions => versions[0])
 }
 
 export const getSummonersInfo = (apiKey, gameServer, names) => {

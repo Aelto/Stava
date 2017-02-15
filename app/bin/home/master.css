@@ -45,7 +45,7 @@ html, body {
 }
 
 .login-menu {
-	background-image: url('imgs/backgrounds/background_4.jpg');
+	!background-image: url('imgs/backgrounds/background_4.jpg');
 	background-position: 92% 54%;
 }
 

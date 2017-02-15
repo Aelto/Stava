@@ -45,10 +45,10 @@ else
     checkAndUpdate( _config.apiKey, _config.gameServer, _config.localVersion )
 
 async function checkAndUpdate(apiKey, gameServer, localVersion) {
-    const liveVersion = await JSON.parse(await api.getGameLiveVersion( apiKey, gameServer ))
+    const liveVersion = await api.getGameLiveVersion( apiKey, gameServer )
 
-    if ( cacheManager.isAppCacheUpdated(apiKey, liveVersion.v) )
-        return  updatesDone( liveVersion.v )
+    if ( cacheManager.isAppCacheUpdated(apiKey, liveVersion) )
+        return  updatesDone( liveVersion )
 
     const asyncUpdateFunctions = [
         cacheManager.updateJsonSpellId,
@@ -70,7 +70,7 @@ async function checkAndUpdate(apiKey, gameServer, localVersion) {
         data.message = `downloading updates ${ currentState }%`
 
         if ( progress === asyncUpdateFunctions.length )
-            updatesDone( liveVersion.v )
+            updatesDone( liveVersion )
     })
 }
 
