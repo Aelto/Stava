@@ -6,6 +6,9 @@ League of Legends Game analyst.
 ![loading screen](/pictures/Capture_1.PNG?raw=true "Loading screen")
 ![runes & masteries](/pictures/Capture_2.PNG?raw=true "Runes & masteries")
 
+# Get Stava
+download the latest release archive from the [releases](https://github.com/Aelto/Stava/releases)
+
 # Configure Stava
 > A bit of configuration is needed to get it work, this section will let you know what is the needed setup before you can freely use the app.
 
@@ -19,8 +22,8 @@ You now have this so-important api key. During stava first-launch (or in the sta
 ## Location of the League Of Legends folder
 to save bandwidth Stava uses the images such as champion splashes or masteries icons located in the League Of Legends folder. To supply your LoL folder location to Stava, click the settings button (gear icon) on the right top corner which will open the settings page. On that page you should see an input labeled **Path to your League of Legends folder**, simply enter the path the the League of Legends directory (my path was, for example, `D:\Program\League Of Legends`).
  
- ## That's it!
- You can now use Stava.
+## That's it!
+You can now use Stava. By running the `Stava.exe`
 
-# Use it
-Clone the repo then install the dev dependencies with `yarn install` or `npm install`. You can then start the electron app with `yarn start` or `npm start` and build from the sources with `yarn run build` or `npm run build`.
+# Build from the sources
+Clone the repo then install the dev dependencies with `yarn install` or `npm install`, then rebuild the bundles with `yarn build` or `npm run build`. The app can be started with `yarn start` or `npm start`. You can package the app with `yarn packager` or `npm run packager`
