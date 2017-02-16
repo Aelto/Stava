@@ -125,9 +125,10 @@ async function startInterval({gameServer, summonerName, apiKey, pathToLeagueFold
 	intervalFunction()
 }
 
+function cancelInterval() {
+	data.global.launchButtonText = 'launch'
 
-    data.global.launchButtonText = 'launch'
+	data.isSpectating = false
 
-    data.isSpectating = false
-
+	clearInterval(intervalId)
 }
