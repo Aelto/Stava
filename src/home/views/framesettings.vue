@@ -20,6 +20,14 @@
                 </button>
             </div>
 
+            <div class="group">
+                <div class="informations">Ignore last game ID.</div>
+                <button
+                    v-on:click='resetLastGameId()'>
+                    Ignore
+                </button>
+            </div>
+
 
             <div class="center">
                 <button class='done-buton'
@@ -33,6 +41,7 @@
 <script>
     import {setApiKey, setGameServer} from '../../common/config.js'
     import {openExplorer} from '../../common/userdata.js'
+    import {setLastGameId} from '../../common/config.js'
 
     export default {
         props: ['global'],
@@ -42,6 +51,9 @@
             },
             openUserData: function () {
                 openExplorer()
+            },
+            resetLastGameId: function () {
+                setLastGameId(0)
             }
         }
     }
