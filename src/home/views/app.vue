@@ -22,6 +22,15 @@
 				<select class="no-drag" name="" v-model='global.gameServer'>
                     <option value='euw'>Europe West</option>
                     <option value='na'>North America</option>
+										<option value='br'>Brazil</option>
+										<option value='eune'>EU Nordic & East</option>
+										<option value='jp'>Japan</option>
+										<option value='kr'>Korea</option>
+										<option value='lan'>Latin America North</option>
+										<option value='las'>Latin America South</option>
+										<option value='oce'>Oceania</option>
+										<option value='ru'>Russia</option>
+										<option value='tr'>Turkey</option>
                 </select>
 			</div>
 
